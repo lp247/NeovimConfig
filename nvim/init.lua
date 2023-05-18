@@ -25,18 +25,31 @@ vim.cmd("autocmd! bufwritepost $MYVIMRC source $MYVIMRC")
 -- Key Maps
 ----------------------------------------------------------------------------
 vim.keymap.set("n", "<SPACE>", "<NOP>")
-vim.keymap.set("n", "<SPACE>sv", ":update<CR>")
-vim.keymap.set("n", "<SPACE>sx", ":update|bp|bd! #<CR>")
-vim.keymap.set("n", "<SPACE>xx", ":bp|bd! #<CR>")
-vim.keymap.set("n", "<SPACE>fe", ":NvimTreeFocus<CR>")
-vim.keymap.set("n", "<SPACE>ff", ":Files<CR>")
-vim.keymap.set("n", "<SPACE>qq", ":quit<CR>")
-vim.keymap.set("n", "<SPACE>gh", ":wincmd h<CR>")
-vim.keymap.set("n", "<SPACE>gj", ":wincmd j<CR>")
-vim.keymap.set("n", "<SPACE>gk", ":wincmd k<CR>")
-vim.keymap.set("n", "<SPACE>gl", ":wincmd l<CR>")
-vim.keymap.set("n", "<SPACE>gm", ":bprevious<CR>")
-vim.keymap.set("n", "<SPACE>g,", ":bnext<CR>")
+vim.keymap.set("n", "<SPACE>e", ":NvimTreeFocus<CR>")
+vim.keymap.set("n", "<SPACE>f", ":Files<CR>")
+if vim.fn.has("mac") then
+    vim.keymap.set("n", "©", ":update|bd<CR>") -- Option + g
+    vim.keymap.set("n", "≈", ":bd<CR>")        -- Option + x
+    vim.keymap.set("n", "«", ":quit<CR>")      -- Option + q
+    vim.keymap.set("n", "‚", ":update<CR>")    -- Option + s
+    vim.keymap.set("n", "ª", ":wincmd h<CR>")  -- Option + h
+    vim.keymap.set("n", "º", ":wincmd j<CR>")  -- Option + j
+    vim.keymap.set("n", "∆", ":wincmd k<CR>")  -- Option + k
+    vim.keymap.set("n", "@", ":wincmd l<CR>")  -- Option + l
+    vim.keymap.set("n", "µ", ":bprevious<CR>") -- Option + m
+    vim.keymap.set("n", "∞", ":bnext<CR>")     -- Option + ,
+else
+    vim.keymap.set("n", "<M-g>", ":update|bd<CR>")
+    vim.keymap.set("n", "<M-x>", ":bd<CR>")
+    vim.keymap.set("n", "<M-q>", ":quit<CR>")
+    vim.keymap.set("n", "<M-s>", ":update<CR>")
+    vim.keymap.set("n", "<M-h>", ":wincmd h<CR>")
+    vim.keymap.set("n", "<M-j>", ":wincmd j<CR>")
+    vim.keymap.set("n", "<M-k>", ":wincmd k<CR>")
+    vim.keymap.set("n", "<M-l>", ":wincmd l<CR>")
+    vim.keymap.set("n", "<M-m>", ":bprevious<CR>")
+    vim.keymap.set("n", "<M-,>", ":bnext<CR>")
+end
 vim.keymap.set("t", "<ESC>", "<C-\\><C-n><CR>")
 vim.cmd("autocmd FileType fzf tnoremap <buffer> <ESC> <ESC>")
 vim.cmd("autocmd FileType fzf tnoremap <C-u> <NOP>")
