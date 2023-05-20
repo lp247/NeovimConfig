@@ -5,7 +5,7 @@ vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.termguicolors = true
-if vim.fn.has("win32") then
+if vim.fn.has("win32") == 1 then
     vim.opt.shell = 'powershell.exe'
     vim.opt.shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;'
     vim.opt.shellredir = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
@@ -35,7 +35,7 @@ end
 vim.keymap.set("n", "<SPACE>", "<NOP>")
 vim.keymap.set("n", "<SPACE>e", ":NvimTreeFocus<CR>")
 vim.keymap.set("n", "<SPACE>f", ":Files<CR>")
-if vim.fn.has("mac") then
+if vim.fn.has("mac") == 1 then
     vim.keymap.set("n", "©", ":update|bd<CR>") -- Option + g
     vim.keymap.set("n", "≈", closeBuffer)      -- Option + x
     vim.keymap.set("n", "«", ":quit<CR>")      -- Option + q
