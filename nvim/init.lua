@@ -123,10 +123,14 @@ require("nvim-tree").setup({
     sort_by = "case_sensitive",
     renderer = {
         group_empty = true,
+        highlight_git = true
     },
     filters = {
         dotfiles = true,
     },
+    git = {
+        enable = true
+    }
 })
 
 -- LSP Setup
