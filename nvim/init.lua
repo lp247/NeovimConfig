@@ -24,12 +24,20 @@ vim.cmd("autocmd! bufwritepost $MYVIMRC source $MYVIMRC")
 
 -- Key Maps
 ----------------------------------------------------------------------------
+function closeBuffer()
+    if vim.bo.modified then
+        print("Current buffer is modified!")
+    else
+        vim.cmd("bprevious")
+        vim.cmd("bdelete #")
+    end
+end
 vim.keymap.set("n", "<SPACE>", "<NOP>")
 vim.keymap.set("n", "<SPACE>e", ":NvimTreeFocus<CR>")
 vim.keymap.set("n", "<SPACE>f", ":Files<CR>")
 if vim.fn.has("mac") then
     vim.keymap.set("n", "©", ":update|bd<CR>") -- Option + g
-    vim.keymap.set("n", "≈", ":bd<CR>")        -- Option + x
+    vim.keymap.set("n", "≈", closeBuffer)      -- Option + x
     vim.keymap.set("n", "«", ":quit<CR>")      -- Option + q
     vim.keymap.set("n", "‚", ":update<CR>")    -- Option + s
     vim.keymap.set("n", "ª", ":wincmd h<CR>")  -- Option + h
@@ -40,7 +48,7 @@ if vim.fn.has("mac") then
     vim.keymap.set("n", "∞", ":bnext<CR>")     -- Option + ,
 else
     vim.keymap.set("n", "<M-g>", ":update|bd<CR>")
-    vim.keymap.set("n", "<M-x>", ":bd<CR>")
+    vim.keymap.set("n", "<M-x>", closeBuffer)
     vim.keymap.set("n", "<M-q>", ":quit<CR>")
     vim.keymap.set("n", "<M-s>", ":update<CR>")
     vim.keymap.set("n", "<M-h>", ":wincmd h<CR>")
