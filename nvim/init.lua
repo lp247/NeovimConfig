@@ -106,10 +106,13 @@ require("packer").startup(function(use)
     use "nvim-tree/nvim-web-devicons"
     use "nvim-tree/nvim-tree.lua"
 
-    -- Others
-    use "lambdalisue/suda.vim"
+    -- Language and Framework Support
     use "neovim/nvim-lspconfig"
     use "purescript-contrib/purescript-vim"
+    use 'wuelnerdotexe/vim-astro'
+
+    -- Others
+    use "lambdalisue/suda.vim"
 
     -- Packer autoload
     if packer_bootstrap then
@@ -137,6 +140,7 @@ require("nvim-tree").setup({
 local lspconfig = require("lspconfig")
 lspconfig.tsserver.setup {}
 lspconfig.purescriptls.setup {}
+lspconfig.astro.setup {}
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -176,6 +180,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
+-- Astro Setup
+vim.g.astro_typescript = "enable"
 
 -- Color Scheme
 ----------------------------------------------------------------------------
