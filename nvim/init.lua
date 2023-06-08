@@ -33,7 +33,6 @@ function closeBuffer()
     end
 end
 vim.keymap.set("n", "<SPACE>", "<NOP>")
-vim.keymap.set("n", "<SPACE>e", ":NvimTreeFocus<CR>")
 vim.keymap.set("n", "<SPACE>f", ":Files<CR>")
 if vim.fn.has("mac") == 1 then
     vim.keymap.set("n", "©", ":update|bd<CR>") -- Option + g
@@ -103,8 +102,15 @@ require("packer").startup(function(use)
         "junegunn/fzf.vim",
         requires = {"junegunn/fzf", run = ":call fzf#install()"}
     }
-    use "nvim-tree/nvim-web-devicons"
-    use "nvim-tree/nvim-tree.lua"
+    use {
+        "nvim-neo-tree/neo-tree.nvim",
+        branch = "v2.x",
+        requires = { 
+            "nvim-lua/plenary.nvim",
+            "nvim-tree/nvim-web-devicons",
+            "MunifTanjim/nui.nvim",
+        }
+    }
 
     -- Language and Framework Support
     use "neovim/nvim-lspconfig"
@@ -120,21 +126,6 @@ require("packer").startup(function(use)
     end
 end)
 
-
--- Nvim Tree Setup
-require("nvim-tree").setup({
-    sort_by = "case_sensitive",
-    renderer = {
-        group_empty = true,
-        highlight_git = true
-    },
-    filters = {
-        dotfiles = true,
-    },
-    git = {
-        enable = true
-    }
-})
 
 -- LSP Setup
 local lspconfig = require("lspconfig")
@@ -182,6 +173,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 -- Astro Setup
 vim.g.astro_typescript = "enable"
+
+-- Neotree Setup
+-- Unless you are still migrating, remove the deprecated commands from v1.x
+vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 
 -- Color Scheme
 ----------------------------------------------------------------------------
