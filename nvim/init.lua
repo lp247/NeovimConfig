@@ -117,13 +117,9 @@ require("packer").startup(function(use)
     -- Language and Framework Support
     use "neovim/nvim-lspconfig"
     use "purescript-contrib/purescript-vim"
-    use 'wuelnerdotexe/vim-astro'
-
-    -- Language Support
-    use "neovim/nvim-lspconfig"
-    use "purescript-contrib/purescript-vim"
     use "hrsh7th/nvim-cmp"
     use "hrsh7th/cmp-nvim-lsp"
+    use 'wuelnerdotexe/vim-astro'
 
     -- Others
     use "lambdalisue/suda.vim"
