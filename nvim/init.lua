@@ -33,7 +33,6 @@ function closeBuffer()
     end
 end
 vim.keymap.set("n", "<SPACE>", "<NOP>")
-vim.keymap.set("n", "<SPACE>f", ":Files<CR>")
 if vim.fn.has("mac") == 1 then
     vim.keymap.set("n", "©", ":update|bd<CR>") -- Option + g
     vim.keymap.set("n", "≈", closeBuffer)      -- Option + x
@@ -45,6 +44,7 @@ if vim.fn.has("mac") == 1 then
     vim.keymap.set("n", "@", ":wincmd l<CR>")  -- Option + l
     vim.keymap.set("n", "µ", ":bprevious<CR>") -- Option + m
     vim.keymap.set("n", "∞", ":bnext<CR>")     -- Option + ,
+    vim.keymap.set("n", "ƒ", ":Files<CR>")     -- Option + f
 else
     vim.keymap.set("n", "<M-g>", ":update|bd<CR>")
     vim.keymap.set("n", "<M-x>", closeBuffer)
@@ -56,6 +56,7 @@ else
     vim.keymap.set("n", "<M-l>", ":wincmd l<CR>")
     vim.keymap.set("n", "<M-m>", ":bprevious<CR>")
     vim.keymap.set("n", "<M-,>", ":bnext<CR>")
+    vim.keymap.set("n", "<M-f>", ":Files<CR>")
 end
 vim.keymap.set("t", "<ESC>", "<C-\\><C-n><CR>")
 vim.cmd("autocmd FileType fzf tnoremap <buffer> <ESC> <ESC>")
