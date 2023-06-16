@@ -46,6 +46,8 @@ if vim.fn.has("mac") == 1 then
     vim.keymap.set("n", "µ", ":bprevious<CR>") -- Option + m
     vim.keymap.set("n", "∞", ":bnext<CR>")     -- Option + ,
     vim.keymap.set("n", "ƒ", ":Files<CR>")     -- Option + f
+    vim.keymap.set("n", "…", ":cprevious<CR>") -- Option + .
+    vim.keymap.set("n", "–", ":cnext<CR>")     -- Option + -
 else
     vim.keymap.set("n", "<M-g>", ":update|bd<CR>")
     vim.keymap.set("n", "<M-x>", closeBuffer)
@@ -58,6 +60,8 @@ else
     vim.keymap.set("n", "<M-m>", ":bprevious<CR>")
     vim.keymap.set("n", "<M-,>", ":bnext<CR>")
     vim.keymap.set("n", "<M-f>", ":Files<CR>")
+    vim.keymap.set("n", "<M-.>", ":cprevious<CR>")
+    vim.keymap.set("n", "<M-->", ":cnext<CR>")
 end
 vim.keymap.set("t", "<ESC>", "<C-\\><C-n><CR>")
 vim.cmd("autocmd FileType fzf tnoremap <buffer> <ESC> <ESC>")
