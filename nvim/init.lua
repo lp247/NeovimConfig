@@ -64,9 +64,11 @@ else
     vim.keymap.set("n", "<M-->", ":cnext<CR>")
 end
 vim.keymap.set("t", "<ESC>", "<C-\\><C-n><CR>")
-vim.cmd("autocmd FileType fzf tnoremap <buffer> <ESC> <ESC>")
-vim.cmd("autocmd FileType fzf tnoremap <C-u> <NOP>")
-vim.cmd("autocmd FileType fzf tnoremap <C-i> <NOP>")
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
 
 -- Plugins
@@ -105,10 +107,6 @@ require("packer").startup(function(use)
 
     -- Files
     use {
-        "junegunn/fzf.vim",
-        requires = {"junegunn/fzf", run = ":call fzf#install()"}
-    }
-    use {
         "nvim-neo-tree/neo-tree.nvim",
         branch = "v2.x",
         requires = { 
@@ -116,6 +114,10 @@ require("packer").startup(function(use)
             "nvim-tree/nvim-web-devicons",
             "MunifTanjim/nui.nvim",
         }
+    }
+    use {
+        'nvim-telescope/telescope.nvim', tag = '0.1.2',
+        requires = { {'nvim-lua/plenary.nvim'} }
     }
 
     -- Language and Framework Support
@@ -127,6 +129,7 @@ require("packer").startup(function(use)
 
     -- Others
     use "lambdalisue/suda.vim"
+    use "nvim-lua/plenary.nvim"
 
     -- Packer autoload
     if packer_bootstrap then
