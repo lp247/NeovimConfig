@@ -35,40 +35,29 @@ function closeBuffer()
 end
 vim.keymap.set("n", "<SPACE>", "<NOP>")
 if vim.fn.has("mac") == 1 then
-    vim.keymap.set("n", "©", ":update|bd<CR>") -- Option + g
-    vim.keymap.set("n", "≈", closeBuffer)      -- Option + x
-    vim.keymap.set("n", "«", ":quit<CR>")      -- Option + q
-    vim.keymap.set("n", "‚", ":update<CR>")    -- Option + s
     vim.keymap.set("n", "ª", ":wincmd h<CR>")  -- Option + h
     vim.keymap.set("n", "º", ":wincmd j<CR>")  -- Option + j
     vim.keymap.set("n", "∆", ":wincmd k<CR>")  -- Option + k
     vim.keymap.set("n", "@", ":wincmd l<CR>")  -- Option + l
-    vim.keymap.set("n", "µ", ":bprevious<CR>") -- Option + m
-    vim.keymap.set("n", "∞", ":bnext<CR>")     -- Option + ,
-    vim.keymap.set("n", "ƒ", ":Files<CR>")     -- Option + f
     vim.keymap.set("n", "…", ":cprevious<CR>") -- Option + .
     vim.keymap.set("n", "–", ":cnext<CR>")     -- Option + -
 else
-    vim.keymap.set("n", "<M-g>", ":update|bd<CR>")
-    vim.keymap.set("n", "<M-x>", closeBuffer)
-    vim.keymap.set("n", "<M-q>", ":quit<CR>")
-    vim.keymap.set("n", "<M-s>", ":update<CR>")
     vim.keymap.set("n", "<M-h>", ":wincmd h<CR>")
     vim.keymap.set("n", "<M-j>", ":wincmd j<CR>")
     vim.keymap.set("n", "<M-k>", ":wincmd k<CR>")
     vim.keymap.set("n", "<M-l>", ":wincmd l<CR>")
-    vim.keymap.set("n", "<M-m>", ":bprevious<CR>")
-    vim.keymap.set("n", "<M-,>", ":bnext<CR>")
-    vim.keymap.set("n", "<M-f>", ":Files<CR>")
     vim.keymap.set("n", "<M-.>", ":cprevious<CR>")
     vim.keymap.set("n", "<M-->", ":cnext<CR>")
 end
 vim.keymap.set("t", "<ESC>", "<C-\\><C-n><CR>")
 local builtin = require('telescope.builtin')
+vim.keymap.set("n", "<leader>ex", ":Neotree float<CR>", {})
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+vim.keymap.set("n", "<leader>q", ":quit<CR>")
+vim.keymap.set("n", "<leader>s", ":update<CR>")
 
 
 -- Plugins
