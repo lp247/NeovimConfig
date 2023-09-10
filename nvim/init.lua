@@ -50,12 +50,18 @@ else
     vim.keymap.set("n", "<M-->", ":cnext<CR>")
 end
 vim.keymap.set("t", "<ESC>", "<C-\\><C-n><CR>")
-local builtin = require('telescope.builtin')
-vim.keymap.set("n", "<leader>ex", ":Neotree float<CR>", {})
-vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+local builtin = require("telescope.builtin")
+local dap = require("dap")
+vim.keymap.set("n", "<leader>dc", dap.continue)
+vim.keymap.set("n", "<leader>dn", dap.step_over)
+vim.keymap.set("n", "<leader>di", dap.step_into)
+vim.keymap.set("n", "<leader>do", dap.step_out)
+vim.keymap.set("n", "<leader>dt", dap.toggle_breakpoint)
+vim.keymap.set("n", "<leader>e", ":Neotree float<CR>", {})
+vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
+vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
+vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
+vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
 vim.keymap.set("n", "<leader>q", ":quit<CR>")
 vim.keymap.set("n", "<leader>s", ":update<CR>")
 
@@ -71,9 +77,9 @@ vim.cmd([[
 
 local ensure_packer = function()
     local fn = vim.fn
-    local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+    local install_path = fn.stdpath("data").."/site/pack/packer/start/packer.nvim"
     if fn.empty(fn.glob(install_path)) > 0 then
-        fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+        fn.system({"git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path})
         vim.cmd [[packadd packer.nvim]]
         return true
     end
@@ -105,8 +111,8 @@ require("packer").startup(function(use)
         }
     }
     use {
-        'nvim-telescope/telescope.nvim', tag = '0.1.2',
-        requires = { {'nvim-lua/plenary.nvim'} }
+        "nvim-telescope/telescope.nvim", tag = "0.1.2",
+        requires = { {"nvim-lua/plenary.nvim"} }
     }
 
     -- Language and Framework Support
@@ -114,7 +120,14 @@ require("packer").startup(function(use)
     use "purescript-contrib/purescript-vim"
     use "hrsh7th/nvim-cmp"
     use "hrsh7th/cmp-nvim-lsp"
-    use 'wuelnerdotexe/vim-astro'
+    use "wuelnerdotexe/vim-astro"
+    use "mfussenegger/nvim-dap"
+    use {"mxsdev/nvim-dap-vscode-js", requires = {"mfussenegger/nvim-dap"}}
+    use {
+      "microsoft/vscode-js-debug",
+      opt = true,
+      run = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out" 
+    }
 
     -- Others
     use "lambdalisue/suda.vim"
@@ -138,26 +151,56 @@ for _, lsp in ipairs(servers) do
   }
 end
 
+-- Debugging Setup
+require("dap-vscode-js").setup({
+  -- node_path = "node", -- Path of node executable. Defaults to $NODE_PATH, and then "node"
+  -- debugger_path = "(runtimedir)/site/pack/packer/opt/vscode-js-debug", -- Path to vscode-js-debug installation.
+  -- debugger_cmd = { "js-debug-adapter" }, -- Command to use to launch the debug server. Takes precedence over `node_path` and `debugger_path`.
+  adapters = { "pwa-node", "pwa-chrome", "pwa-msedge", "node-terminal", "pwa-extensionHost" }, -- which adapters to register in nvim-dap
+  -- log_file_path = "(stdpath cache)/dap_vscode_js.log" -- Path for file logging
+  -- log_file_level = false -- Logging level for output to file. Set to false to disable file logging.
+  -- log_console_level = vim.log.levels.ERROR -- Logging level for output to console. Set to false to disable console output.
+})
+
+for _, language in ipairs({ "typescript", "javascript" }) do
+  require("dap").configurations[language] = {
+      {
+        type = "pwa-node",
+        request = "launch",
+        name = "Launch file",
+        program = "${file}",
+        cwd = "${workspaceFolder}",
+      },
+      {
+        type = "pwa-node",
+        request = "attach",
+        name = "Attach",
+        processId = require"dap.utils".pick_process,
+        cwd = "${workspaceFolder}",
+      }
+  }
+end
+
 -- nvim-cmp setup
 local cmp = require("cmp")
 cmp.setup {
   mapping = cmp.mapping.preset.insert({
-    ['<C-u>'] = cmp.mapping.scroll_docs(-4), -- Up
-    ['<C-d>'] = cmp.mapping.scroll_docs(4), -- Down
+    ["<C-u>"] = cmp.mapping.scroll_docs(-4), -- Up
+    ["<C-d>"] = cmp.mapping.scroll_docs(4), -- Down
     -- C-b (back) C-f (forward) for snippet placeholder navigation.
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<CR>'] = cmp.mapping.confirm {
+    ["<C-Space>"] = cmp.mapping.complete(),
+    ["<CR>"] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     },
-    ['<Tab>'] = cmp.mapping(function(fallback)
+    ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
       else
         fallback()
       end
-    end, { 'i', 's' }),
-    ['<S-Tab>'] = cmp.mapping(function(fallback)
+    end, { "i", "s" }),
+    ["<S-Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
       elseif luasnip.jumpable(-1) then
@@ -165,10 +208,10 @@ cmp.setup {
       else
         fallback()
       end
-    end, { 'i', 's' }),
+    end, { "i", "s" }),
   }),
   sources = {
-    { name = 'nvim_lsp' },
+    { name = "nvim_lsp" },
   },
 }
 
