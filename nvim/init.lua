@@ -104,37 +104,32 @@ require("packer").startup(function(use)
         "hrsh7th/nvim-cmp",
         config = function ()
             local cmp = require("cmp")
-            cmp.setup {
-              mapping = cmp.mapping.preset.insert({
+            local cmp_mapping = cmp.mapping.preset.insert({
                 ["<C-u>"] = cmp.mapping.scroll_docs(-4), -- Up
                 ["<C-d>"] = cmp.mapping.scroll_docs(4), -- Down
-                -- C-b (back) C-f (forward) for snippet placeholder navigation.
                 ["<C-Space>"] = cmp.mapping.complete(),
                 ["<CR>"] = cmp.mapping.confirm {
                   behavior = cmp.ConfirmBehavior.Replace,
                   select = true,
                 },
-                ["<Tab>"] = cmp.mapping(function(fallback)
+                ["<Down>"] = cmp.mapping(function(fallback)
                   if cmp.visible() then
                     cmp.select_next_item()
                   else
                     fallback()
                   end
                 end, { "i", "s" }),
-                ["<S-Tab>"] = cmp.mapping(function(fallback)
+                ["<Up>"] = cmp.mapping(function(fallback)
                   if cmp.visible() then
                     cmp.select_prev_item()
-                  elseif luasnip.jumpable(-1) then
-                    luasnip.jump(-1)
                   else
                     fallback()
                   end
                 end, { "i", "s" }),
-              }),
-              sources = {
-                { name = "nvim_lsp" },
-              },
-            }
+                ["<Tab>"] = cmp.mapping(function(fallback) fallback() end),
+                ["<S-Tab>"] = cmp.mapping(function(fallback) fallback() end),
+            })
+            cmp.setup { mapping = cmp_mapping, sources = { { name = "nvim_lsp" } } }
         end
     }
 
