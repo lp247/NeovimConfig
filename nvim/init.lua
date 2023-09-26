@@ -51,7 +51,12 @@ require("packer").startup(function(use)
 	use("wbthomason/packer.nvim")
 
 	-- Themes
-	use("rebelot/kanagawa.nvim")
+	use({
+        "rebelot/kanagawa.nvim",
+        config = function()
+            vim.cmd("colorscheme kanagawa")
+        end
+    })
 	use("andersevenrud/nordic.nvim")
 
 	-- Git
@@ -259,6 +264,3 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
--- Color Scheme
-----------------------------------------------------------------------------
-vim.cmd("colorscheme kanagawa")
