@@ -1,0 +1,1 @@
+curl -s -L https://github.com/lp247/NeovimConfig/archive/refs/heads/master.zip -o $HOME/file.zip && unzip -qq $HOME/file.zip -d $HOME && rm $HOME/file.zip && ln -s $HOME/NeovimConfig-master/nvim $HOME/.config/nvim && echo "Configuration installed successfully"
