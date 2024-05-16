@@ -21,53 +21,40 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.g.copilot_assume_mapped = true
 
--- Automatically source init.lua on save.
-vim.cmd("autocmd! bufwritepost $MYVIMRC source $MYVIMRC")
-
 -- Plugins
 ----------------------------------------------------------------------------
-vim.cmd([[
-    augroup packer_user_config
-        autocmd!
-        autocmd BufWritePost init.lua source <afile> | PackerCompile
-    augroup end
-]])
-
-local ensure_packer = function()
-	local fn = vim.fn
-	local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-	if fn.empty(fn.glob(install_path)) > 0 then
-		fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
-		vim.cmd([[packadd packer.nvim]])
-		return true
-	end
-	return false
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
 end
+vim.opt.rtp:prepend(lazypath)
 
-local packer_bootstrap = ensure_packer()
-
-require("packer").startup(function(use)
-	-- Plugin Manager
-	use("wbthomason/packer.nvim")
-
+require("lazy").setup({
 	-- Themes
-	use({
+	{
         "rebelot/kanagawa.nvim",
         config = function()
             vim.cmd("colorscheme kanagawa")
         end
-    })
-	use("andersevenrud/nordic.nvim")
+    },
+	"andersevenrud/nordic.nvim",
 
 	-- Git
-	use("tpope/vim-fugitive")
-	use("airblade/vim-gitgutter")
+	"tpope/vim-fugitive",
+	"airblade/vim-gitgutter",
 
 	-- Files
-	use({
+	{
 		"nvim-neo-tree/neo-tree.nvim",
 		branch = "v2.x",
-		requires = {
+		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons",
 			"MunifTanjim/nui.nvim",
@@ -75,11 +62,11 @@ require("packer").startup(function(use)
 		config = function()
 			vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 		end,
-	})
-	use({
+	},
+	{
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.2",
-		requires = { { "nvim-lua/plenary.nvim" } },
+		dependencies = { { "nvim-lua/plenary.nvim" } },
 		config = function()
 			local api = require("telescope.builtin")
 			vim.keymap.set("n", "<leader>ff", api.find_files, {})
@@ -87,12 +74,12 @@ require("packer").startup(function(use)
 			vim.keymap.set("n", "<leader>fb", api.buffers, {})
 			vim.keymap.set("n", "<leader>fh", api.help_tags, {})
 		end,
-	})
+	},
 
 	-- Language and Framework Support
-	use({
+	{
 		"neovim/nvim-lspconfig",
-		requires = { "hrsh7th/cmp-nvim-lsp" },
+		dependencies = { "hrsh7th/cmp-nvim-lsp" },
 		config = function()
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			local lspconfig = require("lspconfig")
@@ -111,9 +98,9 @@ require("packer").startup(function(use)
 				})
 			end
 		end,
-	})
-	use("purescript-contrib/purescript-vim")
-	use({
+	},
+	"purescript-contrib/purescript-vim",
+	{
 		"hrsh7th/nvim-cmp",
 		config = function()
 			local cmp = require("cmp")
@@ -148,16 +135,16 @@ require("packer").startup(function(use)
 			})
 			cmp.setup({ mapping = cmp_mapping, sources = { { name = "nvim_lsp" } } })
 		end,
-	})
+	},
 
-	use("hrsh7th/cmp-nvim-lsp")
-	use({
+	"hrsh7th/cmp-nvim-lsp",
+	{
 		"wuelnerdotexe/vim-astro",
 		config = function()
 			vim.g.astro_typescript = "enable"
 		end,
-	})
-	use({
+	},
+	{
 		"mfussenegger/nvim-dap",
 		config = function()
 			for _, language in ipairs({ "typescript", "javascript" }) do
@@ -185,11 +172,11 @@ require("packer").startup(function(use)
 			vim.keymap.set("n", "<leader>do", api.step_out)
 			vim.keymap.set("n", "<leader>dt", api.toggle_breakpoint)
 		end,
-	})
-	use({ "mxsdev/nvim-dap-vscode-js", requires = { "mfussenegger/nvim-dap" } })
-	use({
+	},
+	{ "mxsdev/nvim-dap-vscode-js", dependencies = { "mfussenegger/nvim-dap" } },
+	{
 		"microsoft/vscode-js-debug",
-		opt = true,
+		optional = true,
 		run = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out",
 		config = function()
 			require("dap-vscode-js").setup({
@@ -202,18 +189,13 @@ require("packer").startup(function(use)
 				-- log_console_level = vim.log.levels.ERROR -- Logging level for output to console. Set to false to disable console output.
 			})
 		end,
-	})
+    },
 
 	-- Others
-	use("lambdalisue/suda.vim")
-	use("nvim-lua/plenary.nvim")
-	use("github/copilot.vim")
-
-	-- Packer autoload
-	if packer_bootstrap then
-		require("packer").sync()
-	end
-end)
+	"lambdalisue/suda.vim",
+	"nvim-lua/plenary.nvim",
+	"github/copilot.vim"
+})
 
 -- Key Maps
 ----------------------------------------------------------------------------
