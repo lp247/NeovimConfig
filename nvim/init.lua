@@ -226,6 +226,7 @@ vim.keymap.set("n", "<leader>s", ":update<CR>")
 vim.keymap.set("n", "<space>g", vim.diagnostic.open_float)
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
+vim.keymap.set("n", "gb", ":ls<CR>:b<Space>")
 
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
