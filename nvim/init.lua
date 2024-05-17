@@ -6,6 +6,7 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.termguicolors = true
 vim.opt.grepprg = "rg --vimgrep --no-heading --smart-case"
+vim.opt.wildignore:append { "node_modules" }
 if vim.fn.has("win32") == 1 then
 	vim.opt.shell = "powershell.exe"
 	vim.opt.shellcmdflag =
