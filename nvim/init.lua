@@ -175,25 +175,10 @@ require("lazy").setup({
 -- Key Maps
 ----------------------------------------------------------------------------
 vim.keymap.set("n", "<SPACE>", "<NOP>")
-if vim.fn.has("mac") == 1 then
-	vim.keymap.set("n", "ª", ":wincmd h<CR>") -- Option + h
-	vim.keymap.set("n", "º", ":wincmd j<CR>") -- Option + j
-	vim.keymap.set("n", "∆", ":wincmd k<CR>") -- Option + k
-	vim.keymap.set("n", "@", ":wincmd l<CR>") -- Option + l
-	vim.keymap.set("n", "…", ":cprevious<CR>") -- Option + .
-	vim.keymap.set("n", "–", ":cnext<CR>") -- Option + -
-	vim.keymap.set("i", "'", "<Plug>(copilot-next)")
-	vim.keymap.set("i", "¿", "<Plug>(copilot-previous)")
-else
-	vim.keymap.set("n", "<M-h>", ":wincmd h<CR>")
-	vim.keymap.set("n", "<M-j>", ":wincmd j<CR>")
-	vim.keymap.set("n", "<M-k>", ":wincmd k<CR>")
-	vim.keymap.set("n", "<M-l>", ":wincmd l<CR>")
-	vim.keymap.set("n", "<M-.>", ":cprevious<CR>")
-	vim.keymap.set("n", "<M-->", ":cnext<CR>")
-	vim.keymap.set("i", "<M-´>", "<Plug>(copilot-next)")
-	vim.keymap.set("i", "<M-ß>", "<Plug>(copilot-previous)")
-end
+vim.keymap.set("n", "<C-h>", ":winc h<CR>")
+vim.keymap.set("n", "<C-j>", ":winc j<CR>")
+vim.keymap.set("n", "<C-k>", ":winc k<CR>")
+vim.keymap.set("n", "<C-l>", ":winc l<CR>")
 vim.keymap.set("t", "<ESC>", "<C-\\><C-n><CR>")
 vim.keymap.set("n", "<leader>q", ":quit<CR>")
 vim.keymap.set("n", "<leader>s", ":update<CR>")
@@ -212,7 +197,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
 		vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 		vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-		vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
 		vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, opts)
 		vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, opts)
 		vim.keymap.set("n", "<space>wl", function()
