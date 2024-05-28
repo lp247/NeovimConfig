@@ -18,8 +18,6 @@ if vim.fn.has("win32") == 1 then
 end
 
 vim.g.mapleader = " "
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
 vim.g.copilot_assume_mapped = true
 
 -- Plugins
