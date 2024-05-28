@@ -184,6 +184,7 @@ vim.keymap.set("n", "<space>g", vim.diagnostic.open_float)
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
 vim.keymap.set("n", "gb", ":ls<CR>:b<Space>")
+vim.keymap.set("n", "<space>fmt", ":!npx prettier --write %<CR>")
 
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
@@ -204,9 +205,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
 		vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, opts)
 		vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-		vim.keymap.set("n", "<space>fmt", function()
-			vim.lsp.buf.format({ async = true })
-		end, opts)
 	end,
 })
 
