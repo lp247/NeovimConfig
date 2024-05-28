@@ -210,3 +210,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
+-- File Associations
+----------------------------------------------------------------------------
+vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
+    pattern = "*.xsjslib",
+    callback = function(ev)
+        vim.bo[ev.buf].filetype = "javascript"
+    end,
+})
+
