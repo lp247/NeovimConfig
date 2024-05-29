@@ -163,7 +163,11 @@ require("lazy").setup({
             vim.keymap.set("n", "<leader>dn", dap.step_over)
             vim.keymap.set("n", "<leader>di", dap.step_into)
             vim.keymap.set("n", "<leader>do", dap.step_out)
-            vim.keymap.set("n", "<leader>dt", dap.toggle_breakpoint)
+            vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint)
+            vim.keymap.set("n", "<leader>df", dap.focus_frame)
+            vim.keymap.set("n", "<leader>dd", dap.disconnect)
+            vim.keymap.set("n", "<leader>dt", dap.terminate)
+            vim.keymap.set("n", "<leader>du", dapui.toggle)
         end,
     },
 
