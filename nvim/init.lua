@@ -181,6 +181,8 @@ vim.keymap.set("t", "<ESC>", "<C-\\><C-n><CR>")
 vim.keymap.set("n", "<leader>q", ":quit<CR>")
 vim.keymap.set("n", "<leader>s", ":update<CR>")
 vim.keymap.set("n", "<leader>g", vim.diagnostic.open_float)
+vim.keymap.set("n", "<leader>n", ":cnext<CR>")
+vim.keymap.set("n", "<leader>p", ":cprev<CR>")
 vim.keymap.set("n", "gb", ":ls<CR>:b<Space>")
 vim.keymap.set("n", "<space>fmt", ":!npx prettier --write %<CR>")
 
