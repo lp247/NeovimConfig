@@ -154,6 +154,19 @@ require("lazy").setup({
                         processId = require("dap.utils").pick_process,
                         cwd = "${workspaceFolder}/fpa-node",
                     },
+                    {
+                        type = "pwa-node",
+                        request = "launch",
+                        name = "Debug XSJSLib Test",
+                        runtimeExecutable = "npm",
+                        runtimeArgs = {
+                          "run",
+                          "test:debug",
+                        },
+                        cwd = "${workspaceFolder}/fpa-node",
+                        console = "integratedTerminal",
+                        internalConsoleOptions = "neverOpen",
+                    }
                 }
             end
             local dap = require("dap")
