@@ -156,14 +156,14 @@ require("lazy").setup({
                     },
                 }
             end
-            local api = require("dap")
+            local dap = require("dap")
             local dapui = require("dapui")
             dapui.setup()
-            vim.keymap.set("n", "<leader>dc", api.continue)
-            vim.keymap.set("n", "<leader>dn", api.step_over)
-            vim.keymap.set("n", "<leader>di", api.step_into)
-            vim.keymap.set("n", "<leader>do", api.step_out)
-            vim.keymap.set("n", "<leader>dt", api.toggle_breakpoint)
+            vim.keymap.set("n", "<leader>dc", dap.continue)
+            vim.keymap.set("n", "<leader>dn", dap.step_over)
+            vim.keymap.set("n", "<leader>di", dap.step_into)
+            vim.keymap.set("n", "<leader>do", dap.step_out)
+            vim.keymap.set("n", "<leader>dt", dap.toggle_breakpoint)
         end,
     },
 
