@@ -126,6 +126,7 @@ require("lazy").setup({
                 version = "1.x",
                 build = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out"
             },
+            { "rcarriga/nvim-dap-ui", dependencies = { "nvim-neotest/nvim-nio" } }
         },
         config = function()
             require("dap-vscode-js").setup({
@@ -156,6 +157,8 @@ require("lazy").setup({
                 }
             end
             local api = require("dap")
+            local dapui = require("dapui")
+            dapui.setup()
             vim.keymap.set("n", "<leader>dc", api.continue)
             vim.keymap.set("n", "<leader>dn", api.step_over)
             vim.keymap.set("n", "<leader>di", api.step_into)
