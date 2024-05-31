@@ -109,7 +109,6 @@ require("lazy").setup({
             cmp.setup({ mapping = cmp_mapping, sources = { { name = "nvim_lsp" } } })
         end,
     },
-
     "hrsh7th/cmp-nvim-lsp",
     {
         "wuelnerdotexe/vim-astro",
