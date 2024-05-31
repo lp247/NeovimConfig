@@ -185,7 +185,6 @@ require("lazy").setup({
 
     -- Others
     "lambdalisue/suda.vim",
-    "nvim-lua/plenary.nvim",
     "github/copilot.vim"
 })
 
