@@ -218,6 +218,7 @@ require("lazy").setup({
             vim.keymap.set("n", "<leader>fg", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
             vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
             vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+            vim.keymap.set("n", "<leader>gs", builtin.git_status, {})
             telescope.load_extension("live_grep_args")
         end
     },
