@@ -205,6 +205,11 @@ require("lazy").setup({
                             ['<C-h>'] = actions.cycle_history_prev
                         }
                     }
+                },
+                pickers = {
+                    git_status = {
+                        initial_mode = "normal"
+                    }
                 }
             }
 
