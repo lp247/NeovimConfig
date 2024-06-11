@@ -37,13 +37,15 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     -- Themes
+    -- Alternatives:
+    -- - rebelot/kanagawa.nvim
+    -- - andersevenrud/nordic.nvim
     {
-        "rebelot/kanagawa.nvim",
+        "arcticicestudio/nord-vim",
         config = function()
-            vim.cmd("colorscheme kanagawa")
+            vim.cmd("colorscheme nord")
         end
     },
-    "andersevenrud/nordic.nvim",
 
     -- Git
     "tpope/vim-fugitive",
