@@ -197,14 +197,14 @@ require("lazy").setup({
             },
         },
         config = function()
-            local telescope = require('telescope')
-            local actions = require('telescope.actions')
-            telescope.setup {
+            local telescope = require("telescope")
+            local actions = require("telescope.actions")
+            telescope.setup({
                 defaults = {
                     mappings = {
                         i = {
-                            ['<C-l>'] = actions.cycle_history_next,
-                            ['<C-h>'] = actions.cycle_history_prev
+                            ["<C-l>"] = actions.cycle_history_next,
+                            ["<C-h>"] = actions.cycle_history_prev
                         }
                     }
                 },
@@ -213,13 +213,13 @@ require("lazy").setup({
                         initial_mode = "normal"
                     }
                 }
-            }
+            })
 
-            local builtin = require('telescope.builtin')
-            vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-            vim.keymap.set("n", "<leader>fg", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
-            vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-            vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+            local builtin = require("telescope.builtin")
+            vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
+            vim.keymap.set("n", "<leader>fg", ":lua require(\"telescope\").extensions.live_grep_args.live_grep_args()<CR>")
+            vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
+            vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
             vim.keymap.set("n", "<leader>gs", builtin.git_status, {})
             telescope.load_extension("live_grep_args")
         end
