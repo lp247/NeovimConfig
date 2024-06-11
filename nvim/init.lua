@@ -244,7 +244,7 @@ vim.keymap.set("n", "<leader>g", vim.diagnostic.open_float)
 vim.keymap.set("n", "<leader>n", ":cnext<CR>")
 vim.keymap.set("n", "<leader>p", ":cprev<CR>")
 vim.keymap.set("n", "gb", ":ls<CR>:b<Space>")
-vim.keymap.set("n", "<space>fmt", ":!npx prettier --write %<CR>")
+vim.keymap.set("n", "<space>fmt", ":!npx prettier --write --config-precedence=file-override --print-width 160 --tab-width 4 --no-bracket-spacing %<CR>")
 
 vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("UserLspConfig", {}),
