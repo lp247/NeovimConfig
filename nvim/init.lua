@@ -210,8 +210,12 @@ require("lazy").setup({
                 },
                 pickers = {
                     git_status = {
-                        initial_mode = "normal"
-		    },
+                        initial_mode = "normal",
+                        layout_config = {
+                            width = 0.99,
+                            preview_width = 0.7
+                        }
+                    },
                     find_files = {
                         find_command = { "rg", "--files", "--hidden", "--follow", "--no-ignore-vcs", "--glob", "!.git", "--glob", "!node_modules", "--glob", "!webpack/build*" }
                     }
