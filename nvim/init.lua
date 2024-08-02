@@ -189,7 +189,7 @@ require("lazy").setup({
     -- Tooling
     {
         "nvim-telescope/telescope.nvim",
-        branch = "0.1.6",
+        branch = "0.1.x",
         dependencies = {
             "nvim-lua/plenary.nvim",
             {
