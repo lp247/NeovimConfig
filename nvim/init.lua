@@ -126,7 +126,7 @@ require("lazy").setup({
             {
                 "microsoft/vscode-js-debug",
                 version = "1.x",
-                build = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out"
+                build = "npm ci --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out"
             },
             { "rcarriga/nvim-dap-ui", dependencies = { "nvim-neotest/nvim-nio" } }
         },
