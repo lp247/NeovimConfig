@@ -40,10 +40,11 @@ require("lazy").setup({
     -- Alternatives:
     -- - rebelot/kanagawa.nvim
     -- - andersevenrud/nordic.nvim
+    -- - arcticicestudio/nord-vim
     {
-        "arcticicestudio/nord-vim",
+        "Mofiqul/vscode.nvim",
         config = function()
-            vim.cmd("colorscheme nord")
+            vim.cmd.colorscheme("vscode")
         end
     },
 
