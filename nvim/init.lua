@@ -217,6 +217,12 @@ require("lazy").setup({
                             preview_width = 0.7
                         }
                     },
+                    buffers = {
+                        sort_lastused = true,
+                        theme = "dropdown",
+                        previewer = false,
+                        initial_mode = "normal"
+                    },
                     find_files = {
                         find_command = { "rg", "--files", "--hidden", "--follow", "--no-ignore-vcs", "--glob", "!.git", "--glob", "!node_modules", "--glob", "!webpack/build*" }
                     }
