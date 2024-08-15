@@ -203,6 +203,12 @@ require("lazy").setup({
             local actions = require("telescope.actions")
             telescope.setup({
                 defaults = {
+                    layout_strategy = "vertical",
+                    layout_config = {
+                        width = 0.9999,
+                        height = 0.9999,
+                        preview_height = 0.7
+                    },
                     mappings = {
                         i = {
                             ["<C-l>"] = actions.cycle_history_next,
@@ -213,10 +219,6 @@ require("lazy").setup({
                 pickers = {
                     git_status = {
                         initial_mode = "normal",
-                        layout_config = {
-                            width = 0.99,
-                            preview_width = 0.7
-                        }
                     },
                     buffers = {
                         sort_lastused = true,
