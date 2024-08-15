@@ -221,6 +221,9 @@ require("lazy").setup({
                         initial_mode = "normal",
                     },
                     buffers = {
+                        initial_mode = "normal",
+                    },
+                    buffers = {
                         sort_lastused = true,
                         theme = "dropdown",
                         previewer = false,
